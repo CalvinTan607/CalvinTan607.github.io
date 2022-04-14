@@ -1,9 +1,10 @@
 import React from 'react'
+import '../css/Header.css'
 
 export default function Header(){
     return(
-        <div>
-            Header
+        <div className="header">
+            <p className='headerText'>United States Covid Statistics Map</p>
         </div>
     )
 }
