@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Views from './components/Views'
 import Data from './components/Data'
 
+
 function App() {
 
 
@@ -16,7 +17,7 @@ function App() {
       <div className="App">
         <Header />
         <Data/>
-           
+        
         <Footer />
       </div>
       </BrowserRouter>

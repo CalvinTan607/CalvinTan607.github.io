@@ -5,17 +5,7 @@ import { useState } from 'react'
 export default function Data() {
   const [data, setData] = useState('')
   const state = `&state=CA`
-  const getData = () => {
-    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?&$limit=10${state}`)
-      .then(res => {
-        console.log(res)
-        setData(res.data)
-        console.log(res.data)
 
-      }).catch(err => {
-        console.log(err)
-      })
-  }
 
   const selectState = (e) => {
     e.preventDefault()
@@ -34,7 +24,7 @@ export default function Data() {
   }
   return (
     <div>
-      <button onClick={getData}>Click Me</button>
+     
 
       <form onSubmit={selectState}>
         <select id="thisState">
