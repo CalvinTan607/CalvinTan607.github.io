@@ -21,19 +21,28 @@ export default function Data() {
     var selected = document.getElementById('thisState')
     var value = selected.value
     console.log(value)
+    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?&$limit=10${value}`)
+      .then(res => {
+        console.log(res)
+        setData(res.data)
+        console.log(res.data)
+
+      }).catch(err => {
+        console.log(err)
+      })
   }
   return (
     <div>
       <button onClick={getData}>Click Me</button> 
 
-      <form onSubmit={selectState}>
+      
         <select id = "thisState">
-          <option value="CA">California</option>
-          <option value="CO" >Colorado</option>
-          <option value="AZ">Arizona</option>
+          <option value="&state=CA">California</option>
+          <option value="&state=CO" >Colorado</option>
+          <option value="&state=AZ">Arizona</option>
         </select>
-        <button type='submit'>Submit</button>
-      </form>
+        <button onClick={selectState}>Submit</button>
+      
 
       {
         data ? data.map(
