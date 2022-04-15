@@ -17,7 +17,8 @@ export default function Data() {
       })
   }
 
-  const selectState = () =>{
+  const selectState = (e) => {
+    e.preventDefault()
     var selected = document.getElementById('thisState')
     var value = selected.value
     console.log(value)
@@ -33,16 +34,18 @@ export default function Data() {
   }
   return (
     <div>
-      <button onClick={getData}>Click Me</button> 
+      <button onClick={getData}>Click Me</button>
 
-      
-        <select id = "thisState">
+      <form onSubmit={selectState}>
+        <select id="thisState">
           <option value="&state=CA">California</option>
           <option value="&state=CO" >Colorado</option>
           <option value="&state=AZ">Arizona</option>
         </select>
-        <button onClick={selectState}>Submit</button>
-      
+        <button>Submit</button>
+
+      </form>
+
 
       {
         data ? data.map(
