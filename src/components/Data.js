@@ -22,7 +22,7 @@ export default function Data() {
     var selected = document.getElementById('thisState')
     var value = selected.value
     console.log(value)
-    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?&$limit=10${value}`)
+    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?&$limit=10${value}&$order=tot_cases%20DESC`)
       .then(res => {
         console.log(res)
         setData(res.data)
