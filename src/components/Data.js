@@ -4,15 +4,13 @@ import { useState } from 'react'
 
 export default function Data() {
   const [data, setData] = useState('')
-  const state = `&state=CA`
-
-
+  
   const selectState = (e) => {
     e.preventDefault()
     var selected = document.getElementById('thisState')
     var value = selected.value
     console.log(value)
-    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?&$limit=10${value}&$order=tot_cases%20DESC`)
+    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?&$limit=1${value}&$order=submission_date%20DESC`)
       .then(res => {
         console.log(res)
         setData(res.data)
@@ -24,8 +22,6 @@ export default function Data() {
   }
   return (
     <div>
-     
-
       <form onSubmit={selectState}>
         <select id="thisState">
           <option value="&state=AL">Alabama</option>
@@ -80,10 +76,9 @@ export default function Data() {
           <option value="&state=WY">Wyoming</option>
         </select>
         <button>Submit</button>
-
       </form>
 
-
+      {/*conditional rendering of data*/}
       {
         data ? data.map(
           datas =>
