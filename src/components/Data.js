@@ -10,7 +10,7 @@ export default function Data() {
     var selected = document.getElementById('thisState')
     var value = selected.value
     console.log(value)
-    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?&$limit=1${value}&$order=submission_date%20DESC`)
+    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1${value}&$order=submission_date%20DESC`)
       .then(res => {
         console.log(res)
         setData(res.data)
@@ -86,6 +86,7 @@ export default function Data() {
               Submission Date: {datas.submission_date} <br></br>
               State: {datas.state}                     <br></br>
               Total Cases: {datas.tot_cases}           <br></br>
+              Total Deaths:{datas.tot_death}
 
             </div>
 
