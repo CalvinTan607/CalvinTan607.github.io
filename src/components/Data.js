@@ -86,8 +86,10 @@ export default function Data() {
               Submission Date: {datas.submission_date} <br></br>
               State: {datas.state}                     <br></br>
               Total Cases: {datas.tot_cases}           <br></br>
-              Total Deaths:{datas.tot_death}           <br></br>
-              Death Rate: {datas.tot_death/datas.tot_cases}
+              Confirmed Cases: {datas.conf_cases}      <br></br>
+              Total Deaths: {datas.tot_death}           <br></br>
+              Confirmed Cases Death Rate: {datas.tot_death/datas.conf_cases} <br></br>
+              Total Cases Death Rate: {datas.tot_death/datas.tot_cases}
             </div>
 
         ) : null
