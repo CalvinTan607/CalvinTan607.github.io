@@ -8,7 +8,7 @@ import Header from './components/Header'
 import Views from './components/Views'
 import Data from './components/Data'
 import MapChart from './components/MapChart'
-
+import USA from './components/USA'
 
 function App() {
 
@@ -19,6 +19,7 @@ function App() {
         <Header />
         <Data/>
         <MapChart/>
+        <USA/>
         <Footer />
       </div>
       </BrowserRouter>
