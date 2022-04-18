@@ -23,9 +23,9 @@ class USA extends Component {
   render() {
     return (
       <div className="App">
-        <h1>react-usa-map</h1>
+        
         <USAMap customize={this.statesFilling()} onClick={this.mapHandler} />
-        <p>More information: <a href="http://github.com/gabidavila/react-usa-map">GitHub</a></p>
+        
       </div>
     );
   }
