@@ -7,7 +7,7 @@ export default function Header(){
     return(
         <div className="header">
             <img className = "logo" src={logo}/>
-            <p className='headerText'>United States Covid Statistics Map</p>
+            <h1 className='headerText'>United States Covid Statistics Map</h1>
         </div>
     )
 }

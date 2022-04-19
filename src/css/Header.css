@@ -1,7 +1,14 @@
 .header{
+    display:flex;
     border:solid;
+    background-color: lightgoldenrodyellow;
+    height:70px;
 }
 
 .headerText{
-    
+    align-self: center;
+}
+
+.logo{
+    width:100px;
 }

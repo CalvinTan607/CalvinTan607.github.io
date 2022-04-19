@@ -8,17 +8,21 @@ import Header from './components/Header'
 import Views from './components/Views'
 import Data from './components/Data'
 
-import USA from './components/USA'
+
+import './css/App.css'
 
 function App() {
 
 
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="AppContainer">
         <Header />
         <Data/>
-        <USA/>
+        <div className ='map'>
+            
+        </div>
+        
         <Footer />
       </div>
       </BrowserRouter>
