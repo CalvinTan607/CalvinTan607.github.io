@@ -14,13 +14,15 @@ import {
 } from 'react-simple-maps'
 
 function stateAbbreviation(state){
-    const name = state.name
-    console.log(name)
-    if(name=="California"){
-        return "CA"
-    } else if (name=="Colorado"){
-        return "CO"
-    }
+    const stateName = state.name;
+
+    const abbreviation = {
+        Arizona: "AZ",
+        California: "CA",
+        Colorado: "CO",
+    };
+
+    return abbreviation[`${stateName}`]
 }
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
