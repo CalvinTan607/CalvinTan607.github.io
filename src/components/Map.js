@@ -83,7 +83,7 @@ const [content,setContent] = useState('')
                 <Geographies geography={geoUrl}>
                     {({geographies})=>
                         geographies.map((geo)=>(
-                            <Geography 
+                        <Geography 
                             key={geo.rsmKey} 
                             geography = {geo} 
                             stroke ="#FFF" 
@@ -102,7 +102,8 @@ const [content,setContent] = useState('')
                                   //console.log(res.data)
                                 }).catch(err => {
                                   console.log(err)
-                                }) 
+                                })
+                                 
                             }}
 
                             style={{
@@ -110,7 +111,7 @@ const [content,setContent] = useState('')
                                     fill:"#F53",
                                     outline:"none"}
                                 }}
-                            />
+                        />
                         ))
                     }
                 </Geographies>
