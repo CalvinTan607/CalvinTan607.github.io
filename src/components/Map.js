@@ -78,9 +78,9 @@ const [content,setContent] = useState('')
 
     return(
         <div>
-            <ComposableMap projection="geoAlbersUsa">
-            <ZoomableGroup zoom={1}>
-            <Geographies geography={geoUrl}>
+        <ComposableMap projection="geoAlbersUsa">
+            
+                <Geographies geography={geoUrl}>
                     {({geographies})=>
                         geographies.map((geo)=>(
                             <Geography 
@@ -88,39 +88,34 @@ const [content,setContent] = useState('')
                             geography = {geo} 
                             stroke ="#FFF" 
                             fill="#DDD"
-                            /*
-                            onMouseLeave={
-                                setContent('')
-                            }
-                            */
                             onMouseDownCapture={()=>{
                                 //console.log(stateAbbreviation(geo.properties))
                                 //console.log(stateAbbreviation(geo.properties))
                                 const abbreviation = stateAbbreviation(geo.properties)
                                 var url = `https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`
                                 console.log(url)
-                              axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
+                                axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
                                 .then(res => {
                                   console.log(res.data)
                                   setContent(res.data)
                                   //console.log(content.tot_cases)
                                   //console.log(res.data)
-                                  
                                 }).catch(err => {
                                   console.log(err)
                                 }) 
-                                
                             }}
+
+                            style={{
+                                hover:{
+                                    fill:"#F53",
+                                    outline:"none"}
+                                }}
                             />
                         ))
                     }
                 </Geographies>
-            </ZoomableGroup>
- 
-            
-
-                
-            </ComposableMap>
+                 
+        </ComposableMap>
         </div>
     )
 }
