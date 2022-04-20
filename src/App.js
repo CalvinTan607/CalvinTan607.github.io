@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Views from './components/Views'
 import Data from './components/Data'
+import Map from './components/Map'
 
 
 import './css/App.css'
@@ -20,7 +21,7 @@ function App() {
         <Header />
         <Data/>
         <div className ='map'>
-            
+            <Map/>
         </div>
         
         <Footer />
