@@ -79,7 +79,7 @@ const [content,setContent] = useState('')
     return(
         <div>
             <ComposableMap projection="geoAlbersUsa">
-            
+            <ZoomableGroup zoom={1}>
             <Geographies geography={geoUrl}>
                     {({geographies})=>
                         geographies.map((geo)=>(
@@ -115,6 +115,8 @@ const [content,setContent] = useState('')
                         ))
                     }
                 </Geographies>
+            </ZoomableGroup>
+ 
             
 
                 
