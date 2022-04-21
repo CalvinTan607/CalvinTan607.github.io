@@ -12,6 +12,7 @@ import {
     Annotation,
     ZoomableGroup,
 } from 'react-simple-maps'
+import { getDefaultNormalizer } from '@testing-library/react';
 
 function stateAbbreviation(state){
     const stateName = state.name;
@@ -71,26 +72,28 @@ function stateAbbreviation(state){
     return abbreviation[`${stateName}`]
 }
 
-function getStateData(state){
-    const abbreviation = stateAbbreviation(state)
-    const url = `https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`
-    axios.get(url)
-    .then(res=>{
-        
-    }).catch(err=>{
-        console.log(err)
-    })
-}
+
+
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 
 function Map(){
+    const [content,setContent] = useState(``)
 
-    const [content,setContent] = useState('')
+    async function getData(abbreviation){
+        await axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
+        .then(res=>{
+            console.log(res.data)
+            setContent(res.data)
+        }).catch(err=>{
+            console.log('something wrong with axios function')
+            console.log(err)
+        })
+}
+
     return(
         
         <div>
-        
         <ComposableMap projection="geoAlbersUsa">
             
                 <Geographies geography={geoUrl}>
@@ -103,32 +106,11 @@ function Map(){
                             fill="#DDD"
                             //maybe declare a function with this axios call
                             onMouseDownCapture={()=>{
-                                //console.log(stateAbbreviation(geo.properties))
-                                //console.log(stateAbbreviation(geo.properties))
-                                const abbreviation = stateAbbreviation(geo.properties)
-                                axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
-                                .then(res => {
-                                  console.log(res.data)
-/*                                const dataToArray = Array.from(res.data)
-                                  console.log(dataToArray) */
-                                  setContent(res.data)
-                                  
-                                  //
-                                  /*
-                                  {
-                                    content.map(contents=>{
-                                        const tot_cases = contents.tot_cases;
-                                        console.log(tot_cases)
-                                    })
-                                  }
-                                */
-                                  console.log(typeof(content))
-                                  console.log("content of content is " + content)
-                                  //console.log(content.tot_cases)
-                                  //console.log(res.data)
-                                }).catch(err => {
-                                  console.log(err)
-                                })
+                                const abbreviation = stateAbbreviation(geo.properties) 
+                                getData(abbreviation)
+                                console.log(content)
+                                //THIS PRINTS OUT THE STATE WOO
+                                console.log(content[0].state)
                             }}
 
                             style={{
@@ -137,9 +119,10 @@ function Map(){
                                     outline:"none"}
                                 }}
 
-                            onMouseLeave={()=>{
+/*                              onMouseLeave={()=>{
                                 setContent('')
-                            }}
+                                console.log("mouse left")
+                            }}   */
                         />
                         ))
                     }
