@@ -71,13 +71,26 @@ function stateAbbreviation(state){
     return abbreviation[`${stateName}`]
 }
 
+function getStateData(state){
+    const abbreviation = stateAbbreviation(state)
+    const url = `https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`
+    axios.get(url)
+    .then(res=>{
+        
+    }).catch(err=>{
+        console.log(err)
+    })
+}
+
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 
 function Map(){
-const [content,setContent] = useState('')
 
+    const [content,setContent] = useState('')
     return(
+        
         <div>
+        
         <ComposableMap projection="geoAlbersUsa">
             
                 <Geographies geography={geoUrl}>
@@ -88,22 +101,34 @@ const [content,setContent] = useState('')
                             geography = {geo} 
                             stroke ="#FFF" 
                             fill="#DDD"
+                            //maybe declare a function with this axios call
                             onMouseDownCapture={()=>{
                                 //console.log(stateAbbreviation(geo.properties))
                                 //console.log(stateAbbreviation(geo.properties))
                                 const abbreviation = stateAbbreviation(geo.properties)
-                                var url = `https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`
-                                console.log(url)
                                 axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
                                 .then(res => {
                                   console.log(res.data)
+/*                                const dataToArray = Array.from(res.data)
+                                  console.log(dataToArray) */
                                   setContent(res.data)
+                                  
+                                  //
+                                  /*
+                                  {
+                                    content.map(contents=>{
+                                        const tot_cases = contents.tot_cases;
+                                        console.log(tot_cases)
+                                    })
+                                  }
+                                */
+                                  console.log(typeof(content))
+                                  console.log("content of content is " + content)
                                   //console.log(content.tot_cases)
                                   //console.log(res.data)
                                 }).catch(err => {
                                   console.log(err)
                                 })
-                                 
                             }}
 
                             style={{
@@ -111,6 +136,10 @@ const [content,setContent] = useState('')
                                     fill:"#F53",
                                     outline:"none"}
                                 }}
+
+                            onMouseLeave={()=>{
+                                setContent('')
+                            }}
                         />
                         ))
                     }
