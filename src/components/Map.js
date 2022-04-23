@@ -1,6 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {geoCentroid} from 'd3-geo'
 import axios from 'axios'
+
+
+
 
 
 
@@ -78,46 +81,48 @@ function stateAbbreviation(state){
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 
 function Map(){
-    const [content,setContent] = useState(``)
+const [toolTipContent,setToolTipContent] = useState(``)
 
-    async function getData(abbreviation){
-        await axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
-        .then(res=>{
-            console.log(res.data)
-            setContent(res.data)
-        }).catch(err=>{
-            console.log('something wrong with axios function')
-            console.log(err)
-        })
+function getData (abbreviation){
+    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
+    .then(res=>{
+        console.log(res.data)
+        setToolTipContent(res.data)
+    }).catch(err=>{
+        console.log(err)
+    })
 }
 
     return(
-        
-        <div>
-        <ComposableMap projection="geoAlbersUsa">
-            
+    <div>
+        {toolTipContent?toolTipContent.map(contents=>
+            <div>
+                Contents has been rendered          <br></br>
+                State: {contents.state}             <br></br>
+                Total Case: {contents.tot_cases}    <br></br>
+            </div>
+            ):null
+        }
+        <ComposableMap projection="geoAlbersUsa"> 
                 <Geographies geography={geoUrl}>
-                    {({geographies})=>
-                        geographies.map((geo)=>(
-                        <Geography 
-                            key={geo.rsmKey} 
-                            geography = {geo} 
-                            stroke ="#FFF" 
-                            fill="#DDD"
-                            //maybe declare a function with this axios call
-                            onMouseDownCapture={()=>{
-                                const abbreviation = stateAbbreviation(geo.properties) 
-                                getData(abbreviation)
-                                console.log(content)
-                                //THIS PRINTS OUT THE STATE WOO
-                                console.log(content[0].state)
+                {({geographies})=>
+                    geographies.map((geo)=>(
+                    <Geography 
+                        key={geo.rsmKey} 
+                        geography = {geo} 
+                        stroke ="#FFF" 
+                        fill="#DDD"
+                        //maybe declare a function with this axios call
+                        onMouseDown={()=>{
+                            const abbreviation = stateAbbreviation(geo.properties) 
+                            getData(abbreviation)                                 
                             }}
-
-                            style={{
-                                hover:{
-                                    fill:"#F53",
-                                    outline:"none"}
-                                }}
+                        
+                        style={{
+                            hover:{
+                                fill:"#F53",
+                                outline:"none"}
+                            }}
 
 /*                              onMouseLeave={()=>{
                                 setContent('')
@@ -129,7 +134,8 @@ function Map(){
                 </Geographies>
                  
         </ComposableMap>
-        </div>
+
+    </div>
     )
 }
 

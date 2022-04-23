@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios'
 import {useState} from 'react'
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from 'react-tooltip'
 
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -22,6 +22,7 @@ function App() {
         <Data/>
         <div className ='map'>
             <Map/>
+            <ReactTooltip>{content}</ReactTooltip>
         </div>
         
         <Footer />
