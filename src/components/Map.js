@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {geoCentroid} from 'd3-geo'
 import axios from 'axios'
-
+import ReactTooltip from 'react-tooltip'
 
 
 
@@ -15,7 +15,7 @@ import {
     Annotation,
     ZoomableGroup,
 } from 'react-simple-maps'
-import { getDefaultNormalizer } from '@testing-library/react';
+
 
 function stateAbbreviation(state){
     const stateName = state.name;
@@ -103,7 +103,10 @@ function getData (abbreviation){
             </div>
             ):null
         }
-        <ComposableMap projection="geoAlbersUsa"> 
+        <ComposableMap 
+            data-tip="" 
+            projection="geoAlbersUsa"> 
+            
                 <Geographies geography={geoUrl}>
                 {({geographies})=>
                     geographies.map((geo)=>(
@@ -118,11 +121,20 @@ function getData (abbreviation){
                             getData(abbreviation)                                 
                             }}
                         
-                        style={{
-                            hover:{
-                                fill:"#F53",
-                                outline:"none"}
-                            }}
+                            style={{
+                                default: {
+                                  fill: "#D6D6DA",
+                                  outline: "none"
+                                },
+                                hover: {
+                                  fill: "#F53",
+                                  outline: "none"
+                                },
+                                pressed: {
+                                  fill: "#E42",
+                                  outline: "none"
+                                }
+                              }}
 
 /*                              onMouseLeave={()=>{
                                 setContent('')

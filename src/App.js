@@ -21,7 +21,7 @@ function App() {
         <Header />
         <Data/>
         <div className ='map'>
-            <Map/>
+            <Map setTooltipContent={setContent}/>
             <ReactTooltip>{content}</ReactTooltip>
         </div>
         
