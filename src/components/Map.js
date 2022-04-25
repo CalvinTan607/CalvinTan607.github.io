@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState,memo} from 'react'
 import {geoCentroid} from 'd3-geo'
 import axios from 'axios'
 import ReactTooltip from 'react-tooltip'
@@ -15,7 +15,6 @@ import {
     Annotation,
     ZoomableGroup,
 } from 'react-simple-maps'
-
 
 function stateAbbreviation(state){
     const stateName = state.name;
@@ -75,18 +74,28 @@ function stateAbbreviation(state){
     return abbreviation[`${stateName}`]
 }
 
-
+async function statistics  (abbreviation){
+    await axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
+    .then(res=>{
+        console.log(res.data)
+        const stats = res.data
+        return stats
+    }).catch(err=>{
+        console.log(err)
+    })
+}
 
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 
-function Map(){
+const Map=()=>{
 const [toolTipContent,setToolTipContent] = useState(``)
 
 function getData (abbreviation){
     axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
     .then(res=>{
         console.log(res.data)
+        console.log(res.data[0])
         setToolTipContent(res.data)
     }).catch(err=>{
         console.log(err)
@@ -95,16 +104,18 @@ function getData (abbreviation){
 
     return(
     <div>
-        {toolTipContent?toolTipContent.map(contents=>
+         {toolTipContent?toolTipContent.map(contents=>
             <div>
                 Contents has been rendered          <br></br>
                 State: {contents.state}             <br></br>
                 Total Case: {contents.tot_cases}    <br></br>
+                Total Deaths: {contents.tot_death}  <br></br>
             </div>
             ):null
-        }
+        } 
+        
         <ComposableMap 
-            data-tip="" 
+            data-tip=""  
             projection="geoAlbersUsa"> 
             
                 <Geographies geography={geoUrl}>
@@ -115,10 +126,11 @@ function getData (abbreviation){
                         geography = {geo} 
                         stroke ="#FFF" 
                         fill="#DDD"
-                        //maybe declare a function with this axios call
+
                         onMouseDown={()=>{
                             const abbreviation = stateAbbreviation(geo.properties) 
-                            getData(abbreviation)                                 
+                            getData(abbreviation)  
+                            //setToolTipContent(statistics(abbreviation))                           
                             }}
                         
                             style={{
