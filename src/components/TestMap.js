@@ -1,4 +1,4 @@
-import React,{memo} from 'react'
+import React,{memo,useState} from 'react'
 import axios from 'axios'
 import {
   ZoomableGroup,
@@ -80,6 +80,7 @@ function getData (abbreviation){
 }
 
 const TestMap = ({ setTooltipContent }) => {
+const [content,setContent] = useState('')
   return (
     <>
       <ComposableMap data-tip="" projection="geoAlbersUsa">
@@ -102,7 +103,7 @@ const TestMap = ({ setTooltipContent }) => {
                   onMouseLeave={() => {
                     setTooltipContent("");
                   }}
-                  
+
                   style={{
                     default: {
                       fill: "#D6D6DA",

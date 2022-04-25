@@ -21,7 +21,6 @@ function App() {
         <Header />
         <Data/>
         <div className ='map'>
-            <Map />
             <TestMap setTooltipContent={setContent} />
             <ReactTooltip>{content}</ReactTooltip>
         </div>
