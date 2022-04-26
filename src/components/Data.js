@@ -13,9 +13,15 @@ export default function Data() {
     const days = document.getElementById('numberOfDays')
     const numberOfDays = days.value
     const state = selected.value
-    console.log(state)
     axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=${numberOfDays}${state}&$order=submission_date%20DESC`)
       .then(res => {
+        const response = res.data;
+        //spliting the time so only the date shows up
+        response.map(responses=>{
+          const split = responses.submission_date.split("T")
+          responses.submission_date=split[0]
+        })
+
         setData(res.data)
       }).catch(err => {
         console.log(err)
