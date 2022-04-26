@@ -1,24 +1,17 @@
-import React, {useEffect, useState,memo} from 'react'
-import {geoCentroid} from 'd3-geo'
+import React,{memo} from 'react'
 import axios from 'axios'
-import ReactTooltip from 'react-tooltip'
-
-
-
-
-
 import {
-    ComposableMap,
-    Geography,
-    Geographies,
-    Marker,
-    Annotation,
-    ZoomableGroup,
-} from 'react-simple-maps'
+  ZoomableGroup,
+  ComposableMap,
+  Geographies,
+  Geography
+} from "react-simple-maps";
 
-function stateAbbreviation(state){
+const geoUrl =
+  "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+
+  function stateAbbreviation(state){
     const stateName = state.name;
-    console.log(stateName)
     const abbreviation = {
         "Arizona": "AZ",
         "Alabama": "AL",
@@ -74,93 +67,79 @@ function stateAbbreviation(state){
     return abbreviation[`${stateName}`]
 }
 
-async function statistics  (abbreviation){
-    await axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
-    .then(res=>{
-        console.log(res.data)
-        const stats = res.data
-        return stats
-    }).catch(err=>{
-        console.log(err)
-    })
+ async function getData (abbreviation){
+    const url = 
+    `https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`
+    
+    const response =
+        await axios.get(url)
+        .then(res=>{
+          const result = res.data[0]
+          const statistics = {
+            state: result.state,
+            tot_cases: result.tot_cases,
+            tot_death: result.tot_death,
+          }
+          return statistics
+      }).catch(err=>{
+          console.log(err)
+      }) 
+  return response
 }
 
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 
-const Map=()=>{
-const [toolTipContent,setToolTipContent] = useState(``)
 
-function getData (abbreviation){
-    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
-    .then(res=>{
-        console.log(res.data)
-        console.log(res.data[0])
-        setToolTipContent(res.data)
-    }).catch(err=>{
-        console.log(err)
-    })
-}
+const Map = ({ setTooltipContent }) => {
 
-    return(
-    <div>
-         {toolTipContent?toolTipContent.map(contents=>
-            <div>
-                Contents has been rendered          <br></br>
-                State: {contents.state}             <br></br>
-                Total Case: {contents.tot_cases}    <br></br>
-                Total Deaths: {contents.tot_death}  <br></br>
-            </div>
-            ):null
-        } 
-        
-        <ComposableMap 
-            data-tip=""  
-            projection="geoAlbersUsa"> 
-            
-                <Geographies geography={geoUrl}>
-                {({geographies})=>
-                    geographies.map((geo)=>(
-                    <Geography 
-                        key={geo.rsmKey} 
-                        geography = {geo} 
-                        stroke ="#FFF" 
-                        fill="#DDD"
+  return (
+    <>
+      <ComposableMap data-tip="" projection="geoAlbersUsa">
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map(geo => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  stroke ="#FFF" 
+                  fill="#DDD" 
+                
+                  onMouseEnter={async() => {
+                     const abbreviation = stateAbbreviation(geo.properties)
+                     const response = await getData(abbreviation)
+                     const stats = {
+                       state: response.state,
+                       tot_cases: response.tot_cases,
+                       tot_death: response.tot_death,
+                     }
+                     setTooltipContent(`${stats.state} --- ${stats.tot_cases} total cases --- ${stats.tot_death} total deaths `)
+                  }}
 
-                        onMouseDown={()=>{
-                            const abbreviation = stateAbbreviation(geo.properties) 
-                            getData(abbreviation)  
-                            //setToolTipContent(statistics(abbreviation))                           
-                            }}
-                        
-                            style={{
-                                default: {
-                                  fill: "#D6D6DA",
-                                  outline: "none"
-                                },
-                                hover: {
-                                  fill: "#F53",
-                                  outline: "none"
-                                },
-                                pressed: {
-                                  fill: "#E42",
-                                  outline: "none"
-                                }
-                              }}
+                  onMouseLeave={() => {
+                    setTooltipContent("")
+                  }} 
 
-/*                              onMouseLeave={()=>{
-                                setContent('')
-                                console.log("mouse left")
-                            }}   */
-                        />
-                        ))
+                  style={{
+                    default: {
+                      fill: "#D6D6DA",
+                      outline: "none"
+                    },
+                    hover: {
+                      fill: "#F53",
+                      outline: "none"
+                    },
+                    pressed: {
+                      fill: "#E42",
+                      outline: "none"
                     }
-                </Geographies>
-                 
-        </ComposableMap>
+                  }}
+                />
+              ))
+            }
+          </Geographies>
+      </ComposableMap>
+    </>
+  );
+};
 
-    </div>
-    )
-}
-
-export default Map;
+export default memo(Map);

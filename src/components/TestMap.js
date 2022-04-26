@@ -1,4 +1,4 @@
-import React,{memo,useState} from 'react'
+import React,{memo} from 'react'
 import axios from 'axios'
 import {
   ZoomableGroup,
@@ -72,18 +72,18 @@ const geoUrl =
     `https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`
     
     const response =
-    await axios.get(url)
-    .then(res=>{
-      const result = res.data[0]
-      const statistics = {
-        state: result.state,
-        tot_cases: result.tot_cases,
-        tot_death: result.tot_death,
-      }
-      return statistics
-  }).catch(err=>{
-      console.log(err)
-  }) 
+        await axios.get(url)
+        .then(res=>{
+          const result = res.data[0]
+          const statistics = {
+            state: result.state,
+            tot_cases: result.tot_cases,
+            tot_death: result.tot_death,
+          }
+          return statistics
+      }).catch(err=>{
+          console.log(err)
+      }) 
   return response
 }
 
@@ -116,7 +116,7 @@ const TestMap = ({ setTooltipContent }) => {
                   }}
 
                   onMouseLeave={() => {
-                    setTooltipContent("");
+                    setTooltipContent("")
                   }} 
 
                   style={{

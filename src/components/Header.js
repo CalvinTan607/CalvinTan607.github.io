@@ -9,7 +9,7 @@ export default function Header(){
             <div className="header">
                 <img className = "logo" src={logo}/>
                 <h1 className='headerText'>United States Covid Statistics Map</h1> 
-                <p>This thing is purely for educational purposes</p>  
+                <p>This thing is purely for educational  and informative purposes</p>  
             </div>
             
         </div>
