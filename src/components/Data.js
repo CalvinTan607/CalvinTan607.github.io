@@ -13,6 +13,11 @@ export default function Data() {
     const days = document.getElementById('numberOfDays')
     const numberOfDays = days.value
     const state = selected.value
+    //limiting the number of days
+    if(numberOfDays>100||numberOfDays<0){
+      alert("Yo chill out")
+      return
+    }
     axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=${numberOfDays}${state}&$order=submission_date%20DESC`)
       .then(res => {
         const response = res.data;
@@ -83,7 +88,7 @@ export default function Data() {
           <option value="&state=WY">Wyoming</option>
         </select>
         How many days 
-        <input id="numberOfDays"></input>
+        <input id="numberOfDays" required></input>
         <button>Submit</button>
       </form>
 
