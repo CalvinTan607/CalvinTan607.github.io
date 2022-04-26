@@ -12,7 +12,6 @@ const geoUrl =
 
   function stateAbbreviation(state){
     const stateName = state.name;
-    console.log(stateName)
     const abbreviation = {
         "Arizona": "AZ",
         "Alabama": "AL",
@@ -78,7 +77,7 @@ const geoUrl =
       const result = res.data[0]
       const statistics = {
         state: result.state,
-        total_cases: result.tot_cases
+        tot_cases: result.tot_cases
       }
       return statistics
   }).catch(err=>{
@@ -91,7 +90,7 @@ const geoUrl =
 
 
 const TestMap = ({ setTooltipContent }) => {
-const [content,setContent] = useState('')
+
   return (
     <>
       <ComposableMap data-tip="" projection="geoAlbersUsa">
@@ -104,14 +103,17 @@ const [content,setContent] = useState('')
                   stroke ="#FFF" 
                   fill="#DDD" 
                 
-                  onMouseDown={async () => {
+                  onMouseEnter={async () => {
                      const abbreviation = stateAbbreviation(geo.properties)
 /*                   const result = await getData(abbreviation)
                      console.log(result) */
 
-                     const thing = await getData(abbreviation)
-                     console.log(thing)
-                     setTooltipContent(`${abbreviation}`)
+                     const response = await getData(abbreviation)
+                     const stats = {
+                       state: response.state,
+                       tot_cases: response.tot_cases
+                     }
+                     setTooltipContent(`${stats.state} --- ${stats.tot_cases} cases`)
                   }}
 
                   onMouseLeave={() => {
