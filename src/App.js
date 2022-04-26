@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios'
 import {useState} from 'react'
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from 'react-tooltip'
 
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -21,7 +21,8 @@ function App() {
         <Header />
         <Data/>
         <div className ='map'>
-            <Map/>
+            <Map setTooltipContent={setContent}/>
+            <ReactTooltip>{content}</ReactTooltip>
         </div>
         
         <Footer />
