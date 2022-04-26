@@ -77,7 +77,8 @@ const geoUrl =
       const result = res.data[0]
       const statistics = {
         state: result.state,
-        tot_cases: result.tot_cases
+        tot_cases: result.tot_cases,
+        tot_death: result.tot_death,
       }
       return statistics
   }).catch(err=>{
@@ -103,17 +104,15 @@ const TestMap = ({ setTooltipContent }) => {
                   stroke ="#FFF" 
                   fill="#DDD" 
                 
-                  onMouseEnter={async () => {
+                  onMouseEnter={async() => {
                      const abbreviation = stateAbbreviation(geo.properties)
-/*                   const result = await getData(abbreviation)
-                     console.log(result) */
-
                      const response = await getData(abbreviation)
                      const stats = {
                        state: response.state,
-                       tot_cases: response.tot_cases
+                       tot_cases: response.tot_cases,
+                       tot_death: response.tot_death,
                      }
-                     setTooltipContent(`${stats.state} --- ${stats.tot_cases} cases`)
+                     setTooltipContent(`${stats.state} --- ${stats.tot_cases} total cases --- ${stats.tot_death} total deaths `)
                   }}
 
                   onMouseLeave={() => {
