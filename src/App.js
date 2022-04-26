@@ -9,7 +9,7 @@ import Header from './components/Header'
 import Views from './components/Views'
 import Data from './components/Data'
 import Map from './components/Map'
-import Card from './components/Card'
+
 
 
 import './css/App.css'

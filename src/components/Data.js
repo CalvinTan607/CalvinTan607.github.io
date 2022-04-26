@@ -9,15 +9,14 @@ export default function Data() {
   
   const selectState = (e) => {
     e.preventDefault()
-    var selected = document.getElementById('thisState')
-    var value = selected.value
-    console.log(value)
-    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=10${value}&$order=submission_date%20DESC`)
+    const selected = document.getElementById('selectedState')
+    const days = document.getElementById('numberOfDays')
+    const numberOfDays = days.value
+    const state = selected.value
+    console.log(state)
+    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=${numberOfDays}${state}&$order=submission_date%20DESC`)
       .then(res => {
-        console.log(res)
         setData(res.data)
-        console.log(res.data)
-
       }).catch(err => {
         console.log(err)
       })
@@ -25,7 +24,7 @@ export default function Data() {
   return (
     <div>
       <form onSubmit={selectState}>
-        <select id="thisState">
+        <select id="selectedState">
           <option value="&state=AL">Alabama</option>
           <option value="&state=AK">Alaska</option>
           <option value="&state=AZ">Arizona</option>
@@ -77,6 +76,8 @@ export default function Data() {
           <option value="&state=WI">Wisconsin</option>
           <option value="&state=WY">Wyoming</option>
         </select>
+        How many days 
+        <input id="numberOfDays"></input>
         <button>Submit</button>
       </form>
 
@@ -84,22 +85,13 @@ export default function Data() {
       {
         data ? data.map(
           datas =>
-/*             <div>
-              Submission Date: {datas.submission_date} <br></br>
-              State: {datas.state}                     <br></br>
-              Total Cases: {datas.tot_cases}           <br></br>
-              Confirmed Cases: {datas.conf_cases}      <br></br>
-              Total Deaths: {datas.tot_death}           <br></br>
-              Confirmed Cases Death Rate: {datas.tot_death/datas.conf_cases} <br></br>
-              Total Cases Death Rate: {datas.tot_death/datas.tot_cases}
-            </div> */
-          <Card
-            date_submitted = {datas.submission_date}
-            state = {datas.state}
-            tot_cases = {datas.tot_cases}
-            tot_death = {datas.tot_death}
-          >
-          </Card>
+            <Card
+                date_submitted = {datas.submission_date}
+                state = {datas.state}
+                tot_cases = {datas.tot_cases}
+                tot_death = {datas.tot_death}
+            >
+            </Card>
         ) : null
       }
     </div>
