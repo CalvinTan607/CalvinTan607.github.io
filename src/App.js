@@ -25,8 +25,7 @@ function App() {
             <Map setTooltipContent={setContent} />
             <ReactTooltip>{content}</ReactTooltip>
         </div>
-        <Card state="CA" tot_cases="1231" tot_death= "213"></Card>
-        <Card state="WO" tot_cases="23121" tot_death="3241"></Card>
+        
         <Footer />
       </div>
       </BrowserRouter>

@@ -1,16 +1,18 @@
 .card{
+    border:solid;
+    border-radius: 10px;
     display:inline-block;
-    background-color: green;
+    /*background-color: green; */
     margin:10px;
 }
 
 .stateName{
     text-align: center;
     font-family:"Lucida Console", "Courier New", monospace;
-    background-color: yellow;
+    /*background-color: yellow; */
 }
 
 .infoSection{
-    background-color: red;
+    /*background-color: red; */
     margin:10px;
 }
