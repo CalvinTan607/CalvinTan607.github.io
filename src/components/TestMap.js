@@ -90,7 +90,7 @@ const geoUrl =
 
 
 
-const Map = ({ setTooltipContent }) => {
+const TestMap = ({ setTooltipContent }) => {
 
   return (
     <>
@@ -142,4 +142,4 @@ const Map = ({ setTooltipContent }) => {
   );
 };
 
-export default memo(Map);
+export default memo(TestMap);
