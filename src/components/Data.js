@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import Card from './Card'
 
+
 export default function Data() {
   const [data, setData] = useState('')
 
@@ -13,11 +14,18 @@ export default function Data() {
     const days = document.getElementById('numberOfDays')
     const numberOfDays = days.value
     const state = selected.value
+    //check if number is integer
+    if(numberOfDays%1!=0){
+        alert("this isnt integer")
+        return
+    }
     //limiting the number of days
-    if(numberOfDays>100||numberOfDays<0){
-      alert("Yo chill out")
+    else if(numberOfDays>100||numberOfDays<0){
+      alert("your input must be within the days limit")
       return
     }
+
+
     axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=${numberOfDays}${state}&$order=submission_date%20DESC`)
       .then(res => {
         const response = res.data;
