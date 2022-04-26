@@ -68,16 +68,27 @@ const geoUrl =
     return abbreviation[`${stateName}`]
 }
 
-function getData (abbreviation){
-  axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`)
-  .then(res=>{
-      console.log(res.data)
-      console.log(res.data[0])
-      return res.data[0]
+ async function getData (abbreviation){
+    const url = 
+    `https://data.cdc.gov/resource/9mfq-cb36.json?$limit=1&state=${abbreviation}&$order=submission_date%20DESC`
+    
+    const response =
+    await axios.get(url)
+    .then(res=>{
+      const result = res.data[0]
+      const statistics = {
+        state: result.state,
+        total_cases: result.tot_cases
+      }
+      return statistics
   }).catch(err=>{
       console.log(err)
-  })
+  }) 
+  return response
 }
+
+
+
 
 const TestMap = ({ setTooltipContent }) => {
 const [content,setContent] = useState('')
@@ -92,17 +103,20 @@ const [content,setContent] = useState('')
                   geography={geo}
                   stroke ="#FFF" 
                   fill="#DDD" 
-                  
-                  onMouseEnter={() => {
+                
+                  onMouseDown={async () => {
                      const abbreviation = stateAbbreviation(geo.properties)
-                     const result = getData(abbreviation)
-                     console.log(result)
+/*                   const result = await getData(abbreviation)
+                     console.log(result) */
+
+                     const thing = await getData(abbreviation)
+                     console.log(thing)
                      setTooltipContent(`${abbreviation}`)
                   }}
 
                   onMouseLeave={() => {
                     setTooltipContent("");
-                  }}
+                  }} 
 
                   style={{
                     default: {
