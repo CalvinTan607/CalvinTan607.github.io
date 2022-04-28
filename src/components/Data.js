@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useState } from 'react'
 import Card from './Card'
 
+import "../css/Data.css"
+
 
 export default function Data() {
   const [data, setData] = useState('')
@@ -100,7 +102,7 @@ export default function Data() {
         <input id="numberOfDays" required></input>
         <button>Submit</button>
       </form>
-    <div>
+    <div className = "cardsSection">
          {/*conditional rendering of data*/}
       {
         data ? data.map(
@@ -110,6 +112,7 @@ export default function Data() {
                 state = {datas.state}
                 tot_cases = {datas.tot_cases}
                 tot_death = {datas.tot_death}
+                death_rate = {datas.tot_death/datas.tot_cases}
             >
             </Card>
         ) : null

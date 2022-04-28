@@ -2,9 +2,9 @@
     border:solid;
     border-radius: 10px;
     display:inline-block;
-    /*background-color: green; */
-    margin:10px;
+    margin:15px;
     width:180px;
+    position:relative;
 }
 
 .stateName{
@@ -14,6 +14,12 @@
 }
 
 .infoSection{
-    /*background-color: red; */
+    background-color: red; 
     margin:10px;
+}
+
+.date{
+    position:absolute;
+    top:0px;
+    font-size: 0.6em;
 }
