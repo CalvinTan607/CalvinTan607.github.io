@@ -15,12 +15,12 @@ export default function Data() {
     const numberOfDays = days.value
     const state = selected.value
     //check if number is integer
-    if(numberOfDays%1!=0){
-        alert("this isnt integer")
-        return
+    if(numberOfDays%1!==0){
+      alert("this isnt integer")
+      return
     }
     //limiting the number of days
-    else if(numberOfDays>100||numberOfDays<0){
+    else if(numberOfDays>100||numberOfDays<=0){
       alert("your input must be within the days limit")
       return
     }
@@ -40,6 +40,7 @@ export default function Data() {
         console.log(err)
       })
   }
+
   return (
     <div>
       <form onSubmit={selectState}>
@@ -99,8 +100,8 @@ export default function Data() {
         <input id="numberOfDays" required></input>
         <button>Submit</button>
       </form>
-
-      {/*conditional rendering of data*/}
+    <div>
+         {/*conditional rendering of data*/}
       {
         data ? data.map(
           datas =>
@@ -113,6 +114,8 @@ export default function Data() {
             </Card>
         ) : null
       }
+    </div>
+
     </div>
   )
 }
