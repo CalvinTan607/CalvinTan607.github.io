@@ -36,7 +36,7 @@ export default function Data() {
           const split = responses.submission_date.split("T")
           responses.submission_date=split[0]
         })
-        setMsg(`Covid statistics for ${res.data[0].state} over the last ${days} days`)
+        setMsg(`Covid statistics for ${res.data[0].state}`)
         setData(res.data)
       }).catch(err => {
         console.log(err)
