@@ -1,7 +1,5 @@
 .header{
     display:flex;
-    border:solid;
-    background-color: lightgoldenrodyellow;
     height:80px;
 }
 
@@ -14,5 +12,11 @@
 }
 
 .headerNote{
-    background-color: green;
+    margin:0px;
+    color:red;
+}
+
+.entireHeader{
+    border:solid;
+    background-color: lightgoldenrodyellow;
 }

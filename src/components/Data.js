@@ -103,7 +103,7 @@ export default function Data() {
         <button>Submit</button>
       </form>
     {
-      msg?<h1>{msg}</h1> : null
+      msg?<h1 style={{textAlign:"center"}}>{msg}</h1> : null
     }
     <div className = "cardsSection">
       {/*conditional rendering of data*/}
