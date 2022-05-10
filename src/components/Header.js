@@ -8,10 +8,9 @@ export default function Header(){
         <div >
             <div className="header">
                 <img className = "logo" src={logo}/>
-                <h1 className='headerText'>United States Covid Statistics Map</h1> 
-                <p>This thing is purely for educational  and informative purposes</p>  
+                <h1 className='headerText'>US Covid Statistics Map</h1> 
             </div>
-            
+            <p className="headerNote">This thing is purely for educational and informative purposes, I am not involved with the CDC</p>  
         </div>
     )
 }

@@ -8,7 +8,7 @@ import "../css/Data.css"
 
 export default function Data() {
   const [data, setData] = useState('')
-
+  const [msg,setMsg] = useState('')
   
   const selectState = (e) => {
     e.preventDefault()
@@ -36,7 +36,7 @@ export default function Data() {
           const split = responses.submission_date.split("T")
           responses.submission_date=split[0]
         })
-
+        setMsg(`Covid statistics for ${res.data[0].state} over the last ${days} days`)
         setData(res.data)
       }).catch(err => {
         console.log(err)
@@ -102,8 +102,11 @@ export default function Data() {
         <input id="numberOfDays" required></input>
         <button>Submit</button>
       </form>
+    {
+      msg?<h1>{msg}</h1> : null
+    }
     <div className = "cardsSection">
-         {/*conditional rendering of data*/}
+      {/*conditional rendering of data*/}
       {
         data ? data.map(
           datas =>
