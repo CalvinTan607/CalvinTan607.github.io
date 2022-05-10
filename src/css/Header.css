@@ -13,10 +13,11 @@
 
 .headerNote{
     margin:0px;
-    color:red;
+    color:green;
 }
 
 .entireHeader{
     border:solid;
     background-color: lightgoldenrodyellow;
+    background-color:orangered;
 }

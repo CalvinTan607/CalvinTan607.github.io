@@ -21,10 +21,10 @@ function App() {
       <div className="AppContainer">
         <Header />
         <Data/>
-        <div className ='map'>
+         <div className ='map'>
             <Map setTooltipContent={setContent} />
             <ReactTooltip>{content}</ReactTooltip>
-        </div>
+        </div> 
         
         <Footer />
       </div>
