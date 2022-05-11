@@ -6,14 +6,24 @@ export default function Footer(){
         <div className="footer-container">
             Footer
         <div className = "column">
-            <h4>CDC Stuff</h4>
-            <li>
+            <h4 className='column-title'>CDC Stuff</h4>
+            <ul className='footer-list'>
                 <ul>Heu</ul>
                 <ul>yuou</ul>
-            </li>
+                <a 
+                    href='https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36'
+                    target="_blank"
+                    >
+                    CDC Data Set
+                </a>
+            </ul>
         </div>
         <div className = "column">
-            <h4>Contact Info</h4>
+            <h4 className='column-title'>Contact Info</h4>
+            <ul className='footer-list'>
+                <ul>Heu</ul>
+                <ul>yuou</ul>
+            </ul>
         </div>
 
         </div>

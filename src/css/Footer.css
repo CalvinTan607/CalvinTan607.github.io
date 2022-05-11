@@ -4,3 +4,17 @@
     background-color: orangered;
     margin-top: auto;
 }
+
+.column{
+    width:200px;
+    background-color: green;
+    margin:10px;
+}
+
+.footer-list>*{
+    color:white;
+}
+
+.column-title{
+    text-align: center;
+}
