@@ -1,4 +1,6 @@
 .cardsSection{
     display:flex;
-    justify-content: space-between;
+    margin:auto;
+    width:95%;
+    flex-wrap: wrap;
 }
