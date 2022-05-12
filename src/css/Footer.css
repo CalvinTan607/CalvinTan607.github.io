@@ -13,6 +13,8 @@
 
 .footer-list>*{
     color:white;
+    text-align:center;
+    background-color: red;    
 }
 
 .column-title{

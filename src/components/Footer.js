@@ -25,7 +25,10 @@ export default function Footer(){
                 <ul>yuou</ul>
             </ul>
         </div>
-
+        <div>
+            <hr style={{width:'100%'}}></hr>
+            hwy
+        </div>
         </div>
     )
 }
