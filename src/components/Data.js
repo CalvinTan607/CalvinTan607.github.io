@@ -45,8 +45,9 @@ export default function Data() {
 
   return (
     <div>
-      <form onSubmit={selectState}>
-        <select id="selectedState">
+      <form  className = 'form' onSubmit={selectState}>
+        <label className='label'>Select a State</label>
+        <select className='input' id="selectedState">
           <option value="&state=AL">Alabama</option>
           <option value="&state=AK">Alaska</option>
           <option value="&state=AZ">Arizona</option>
@@ -98,9 +99,9 @@ export default function Data() {
           <option value="&state=WI">Wisconsin</option>
           <option value="&state=WY">Wyoming</option>
         </select>
-        How many days 
-        <input id="numberOfDays" required></input>
-        <button>Submit</button>
+        <label className='label'>How many days</label> 
+        <input className='input' id="numberOfDays" required></input>
+        <button className='submitButton'>Submit</button>
       </form>
     {
       msg?<h1 style={{textAlign:"center"}}>{msg}</h1> : null
