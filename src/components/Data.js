@@ -22,7 +22,7 @@ export default function Data() {
       return
     }
     //limiting the number of days
-    else if(numberOfDays>100||numberOfDays<=0){
+    else if(numberOfDays>365||numberOfDays<=0){
       alert("your input must be within the days limit")
       return
     }
@@ -46,6 +46,9 @@ export default function Data() {
   return (
     <div>
       <form  className = 'form' onSubmit={selectState}>
+        <h2 className='formTitle'>
+          Look up Covid 19 Statistics by State
+        </h2>
         <label className='label'>Select a State</label>
         <select className='input' id="selectedState">
           <option value="&state=AL">Alabama</option>
@@ -99,7 +102,9 @@ export default function Data() {
           <option value="&state=WI">Wisconsin</option>
           <option value="&state=WY">Wyoming</option>
         </select>
-        <label className='label'>How many days</label> 
+        <label className='label'>
+          How many days (between 1-365 days)
+        </label> 
         <input className='input' id="numberOfDays" required></input>
         <button className='submitButton'>Submit</button>
       </form>
