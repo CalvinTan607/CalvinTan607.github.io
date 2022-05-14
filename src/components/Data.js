@@ -2,11 +2,14 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import Card from './Card'
+import Alert from 'react-bootstrap/Alert'
 
 import "../css/Data.css"
 
 
+
 export default function Data() {
+  const [error,setError] = useState('')
   const [data, setData] = useState('')
   const [msg,setMsg] = useState('')
   
@@ -18,12 +21,12 @@ export default function Data() {
     const state = selected.value
     //check if number is integer
     if(numberOfDays%1!==0){
-      alert("this isnt integer")
-      return
+      setError('Please enter an integer');
+      return 
     }
     //limiting the number of days
     else if(numberOfDays>365||numberOfDays<=0){
-      alert("your input must be within the days limit")
+      setError('Your input must be within the days limit')
       return
     }
 
@@ -45,6 +48,10 @@ export default function Data() {
 
   return (
     <div>
+      {error
+          ? <Alert key = 'danger' variant='danger' onClose={() => setError('')} dismissible> {error}</Alert>
+          : null
+      }
       <form  className = 'form' onSubmit={selectState}>
         <h2 className='formTitle'>
           Look up Covid 19 Statistics by State
@@ -114,7 +121,8 @@ export default function Data() {
     <div className = "cardsSection">
       {/*conditional rendering of data*/}
       {
-        data ? data.map(
+        data 
+        ? data.map(
           datas =>
             <Card
                 date_submitted = {datas.submission_date}
@@ -124,7 +132,8 @@ export default function Data() {
                 death_rate = {datas.tot_death/datas.tot_cases}
             >
             </Card>
-        ) : null
+          ) 
+        : null
       }
     </div>
 

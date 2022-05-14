@@ -8,9 +8,8 @@ import Header from './components/Header'
 import Views from './components/Views'
 
 
-
-
 import './css/App.css'
+
 
 function App() {
   return (
