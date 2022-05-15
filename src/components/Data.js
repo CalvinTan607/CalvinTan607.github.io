@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import Card from './Card'
-import Alert from 'react-bootstrap/Alert'
+import {Alert,Form,Button} from 'react-bootstrap'
 
 import "../css/Data.css"
 
@@ -52,6 +52,73 @@ export default function Data() {
           ? <Alert key = 'danger' variant='danger' onClose={() => setError('')} dismissible> {error}</Alert>
           : null
       }
+
+      <Form onSubmit={selectState}>
+        <Form.Group  controlId = 'selectedState'>
+            <Form.Label className='mb-3'>Select a State</Form.Label>
+            <Form.Select  >
+              <option value="&state=AL">Alabama</option>
+              <option value="&state=AK">Alaska</option>
+              <option value="&state=AZ">Arizona</option>
+              <option value="&state=AR">Arkansas</option>
+              <option value="&state=CA">California</option>
+              <option value="&state=CO" >Colorado</option>
+              <option value="&state=CT">Connecticut</option>
+              <option value="&state=DE">Delaware</option>
+              <option value="&state=FL">Florida</option>
+              <option value="&state=GA">Georgia</option>
+              <option value="&state=HI">Hawaii</option>
+              <option value="&state=ID">Idaho</option>
+              <option value="&state=IL">Illinois</option>
+              <option value="&state=IN">Indiana</option>
+              <option value="&state=IA">Iowa</option>
+              <option value="&state=KS">Kansas</option>
+              <option value="&state=KY">Kentucky</option>
+              <option value="&state=LA">Louisana</option>
+              <option value="&state=ME">Maine</option>
+              <option value="&state=MD">Maryland</option>
+              <option value="&state=MA">Massachusetts</option>
+              <option value="&state=MI">Michigan</option>
+              <option value="&state=MN">Minnesota</option>
+              <option value="&state=MS">Mississippi</option>
+              <option value="&state=MO">Missouri</option>
+              <option value="&state=MT">Montana</option>
+              <option value="&state=NE">Nebraska</option>
+              <option value="&state=NV">Nevada</option>
+              <option value="&state=NH">New Hampshire</option>
+              <option value="&state=NJ">New Jersey</option>
+              <option value="&state=NM">New Mexico</option>
+              <option value="&state=NY">New York</option>
+              <option value="&state=NC">North Carolina</option>
+              <option value="&state=ND">North Dakota</option>
+              <option value="&state=OH">Ohio</option>
+              <option value="&state=OK">Oklahoma</option>
+              <option value="&state=OR">Oregon</option>
+              <option value="&state=PA">Pennsylvania</option>
+              <option value="&state=RI">Rhode Island</option>
+              <option value="&state=SC">South Carolina</option>
+              <option value="&state=SD">South Dakota</option>
+              <option value="&state=TN">Tennessee</option>
+              <option value="&state=TX">Texas</option>
+              <option value="&state=UT">Utah</option>
+              <option value="&state=VT">Vermont</option>
+              <option value="&state=VA">Virginia</option>
+              <option value="&state=WA">Washington</option>
+              <option value="&state=WV">West Virginia</option>
+              <option value="&state=WI">Wisconsin</option>
+              <option value="&state=WY">Wyoming</option>
+            </Form.Select>
+        </Form.Group>
+        <Form.Group controlId ='numberOfDays'>
+          <Form.Label>How many days</Form.Label>
+          <Form.Control type = 'input'></Form.Control>
+          <Form.Text>Enter an integer between 1 - 365</Form.Text>
+        </Form.Group>
+        <Button type = 'submit' >Submit</Button>
+      </Form>
+
+
+
       <form  className = 'form' onSubmit={selectState}>
         <h2 className='formTitle'>
           Look up Covid 19 Statistics by State
