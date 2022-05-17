@@ -1,8 +1,9 @@
 import React from 'react'
 import '../css/Header.css'
 import logo from '../images/covid_image.png'
-import {Link} from 'react-router-dom'
 
+import {Link} from 'react-router-dom'
+import { Navbar } from 'react-bootstrap'
 
 export default function Header(){
     return(
@@ -18,6 +19,18 @@ export default function Header(){
             <p className="headerNote">
                 This thing is purely for educational and informative purposes, I am not involved with the CDC
             </p>  
+            <Navbar bg="dark" variant="dark">
+      <Navbar.Brand href="/Data">
+        <img
+          alt=""
+          src={logo}
+          width="95"
+          height="90"
+          className="d-inline-block align-top"
+        />{' '}
+      US Covid Statistics Map
+      </Navbar.Brand>
+      </Navbar>
         </div>
     )
 }
