@@ -54,21 +54,32 @@ export default function Data() {
     e.preventDefault()
     const selected = document.getElementById('selectedStateChart')
     const days = document.getElementById('numberOfDaysChart')
+    const whichData = document.getElementById('casesOrDeaths')
+
+    const whichStat = whichData.value
     const numberOfDays = days.value
     const state = selected.value
 
-        //check if number is integer
+    var label;
+
+    if(whichStat === 'tot_cases')
+      label = "Total Cases"
+    else 
+      label = "Total Deaths"
+
+    //check if number is integer
     if(numberOfDays%1!==0){
       setError('Please enter an integer');
       return 
       }
         //limiting the number of days
-      else if(numberOfDays>365||numberOfDays<=0){
+      else if(numberOfDays>365||numberOfDays<=2){
         setError('Your input must be within the days limit')
         return
       }
       axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=${numberOfDays}${state}&$order=submission_date%20DESC`)
       .then(res => {
+        console.log(res.data[0])
         const response = res.data.reverse();
         //spliting the time so only the date shows up
         response.map(responses=>{
@@ -80,8 +91,9 @@ export default function Data() {
         setChartData({
           labels:res.data.map((data)=>data.submission_date),
           datasets:[{
-            label: "Covid Cases",
-            data: res.data.map((data)=>data.tot_cases)
+            label: label,
+            data: res.data.map((data)=>data[`${whichStat}`]),
+            backgroundColor:['red'],
           }]
         })
       }).catch(err => {
@@ -231,9 +243,18 @@ export default function Data() {
         <Form.Group controlId ='numberOfDaysChart'>
           <Form.Label className='mb-3'>How many days</Form.Label>
           <Form.Control type = 'input'></Form.Control>
-          <Form.Text>Enter an integer between 1 - 365</Form.Text>
+          <Form.Text>Enter an integer between 2 - 365</Form.Text>
         </Form.Group>
-          </Col>
+        </Col>
+        <Col>
+          <Form.Group controlId = 'casesOrDeaths'>
+            <Form.Label className = 'mb-3'>View Cases or Deaths?</Form.Label>
+              <Form.Select>
+                <option value = "tot_cases">Total Cases</option>
+                <option value = "tot_death">Total Deaths</option>
+              </Form.Select>
+          </Form.Group>
+        </Col>
         </Row>
         
         <Button type = 'submit' >Submit</Button>
