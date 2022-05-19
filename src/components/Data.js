@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 
-import Card from './Card'
+import InfoCard from './InfoCard'
 import {Row,Col,Alert,Form,Button} from 'react-bootstrap'
 import LineChart from './LineChart'
 
@@ -108,7 +108,7 @@ export default function Data() {
           ? <Alert key = 'danger' variant='danger' onClose={() => setError('')} dismissible> {error}</Alert>
           : null
       }
-
+  <h1>Display Data in Cards</h1>
       <Form onSubmit={selectState}>
         <Row>
           <Col>
@@ -179,7 +179,7 @@ export default function Data() {
         
         <Button type = 'submit' >Submit</Button>
       </Form>
-
+    <h1>Display Data in a Line Chart</h1>
       <Form onSubmit={getChartData}>
         <Row>
           <Col>
@@ -269,14 +269,15 @@ export default function Data() {
         data 
         ? data.map(
           datas =>
-            <Card
+            <InfoCard
                 date_submitted = {datas.submission_date}
                 state = {datas.state}
                 tot_cases = {datas.tot_cases}
                 tot_death = {datas.tot_death}
-                death_rate = {datas.tot_death/datas.tot_cases}
+                new_case = {datas.new_case}
+                new_death = {datas.new_death}
             >
-            </Card>
+            </InfoCard>
           ) 
         : null
       }

@@ -1,11 +1,5 @@
 .card{
-    background-color: orange;
-    border:1px solid #dedede;
-    border-radius: 10px;
-    display:inline-block;
-    margin:10px auto;
-    /*width:18%; */
-    position:relative;
+    width:90%;
 }
 
 .stateName{
