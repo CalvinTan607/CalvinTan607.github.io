@@ -1,22 +1,2 @@
-.footer-container{
-    display:flex;
-    border:solid;
-    background-color: orangered;
-    margin-top: auto;
-}
 
-.column{
-    width:200px;
-    background-color: green;
-    margin:10px;
-}
 
-.footer-list>*{
-    color:white;
-    text-align:center;
-    background-color: red;    
-}
-
-.column-title{
-    text-align: center;
-}
