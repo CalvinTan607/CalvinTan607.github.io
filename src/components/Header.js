@@ -30,6 +30,9 @@ export default function Header(){
             <Nav.Item>
                 <Nav.Link href='/'>Map</Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href='/lineChartPage'>LineChart</Nav.Link>
+            </Nav.Item>
         </Nav>
       </Navbar>
 
