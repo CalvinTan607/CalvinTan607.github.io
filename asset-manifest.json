@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/CalvinTan607.github.io/static/css/main.955b0e38.css",
+    "main.js": "/CalvinTan607.github.io/static/js/main.8e5ebf10.js",
+    "static/media/covid_image.png": "/CalvinTan607.github.io/static/media/covid_image.1ee27bd0aef60becb39f.png",
+    "index.html": "/CalvinTan607.github.io/index.html",
+    "main.955b0e38.css.map": "/CalvinTan607.github.io/static/css/main.955b0e38.css.map",
+    "main.8e5ebf10.js.map": "/CalvinTan607.github.io/static/js/main.8e5ebf10.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.955b0e38.css",
+    "static/js/main.8e5ebf10.js"
+  ]
+}
