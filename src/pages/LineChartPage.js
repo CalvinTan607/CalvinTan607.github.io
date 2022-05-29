@@ -34,7 +34,7 @@ export default function LineChartPage(){
           return 
           }
             //limiting the number of days
-          else if(numberOfDays>365||numberOfDays<=2){
+          else if(numberOfDays>365||numberOfDays<=1){
             setError('Your input must be within the days limit')
             return
           }
