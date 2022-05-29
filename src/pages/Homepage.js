@@ -18,7 +18,7 @@ export default function Homepage(){
                 </Col>
                 <Col>
                     <p>
-                        This is a react application which shows Covid 19 statistics for the US. There are several forms this info can be displayed such 
+                        This is a react application which shows Covid 19 statistics for the US. There are several forms this information can be displayed such 
                         as a Line Chart, Cards, and an Interactive Map. 
                     </p>
                 </Col>
@@ -35,7 +35,7 @@ export default function Homepage(){
                 </Col>
                 <Col>
                     <p>
-                        The dataset is managed by the CDC, it is updated twice a day and statistics are updated by 
+                        The dataset is managed by the CDC, it is updated twice a day and statistics are updated by jurisdiction 
 
                         L
                     </p>

@@ -60,9 +60,13 @@ export default function Data() {
       }
   <h1>Display Data in Cards</h1>
   <Container className='bg-info'>
+    <Row>
+      <Col>
+        This is 
+      </Col>
+      <Col>
       <Form onSubmit={selectState}>
-        <Row>
-          <Col>
+
           <Form.Group  controlId = 'selectedState'>
             <Form.Label className='mb-3'>Select a State</Form.Label>
             <Form.Select  >
@@ -118,18 +122,18 @@ export default function Data() {
               <option value="&state=WY">Wyoming</option>
             </Form.Select>
         </Form.Group>
-        </Col>
-        <Col>
+
         <Form.Group controlId ='numberOfDays'>
           <Form.Label className='mb-3'>How many days</Form.Label>
           <Form.Control type = 'input'></Form.Control>
           <Form.Text>Enter an integer between 1 - 365</Form.Text>
         </Form.Group>
-          </Col>
-        </Row>
+
         
         <Button type = 'submit' >Submit</Button>
       </Form>
+      </Col>
+      </Row>
     </Container>
     
     {
