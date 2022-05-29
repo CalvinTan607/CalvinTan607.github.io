@@ -5,17 +5,18 @@ import {Navbar,Container,Nav} from 'react-bootstrap'
 
 export default function Footer(){
     return(
-    <Container className = 'd-flex flex-column min-vh-100' >
     <Navbar className = 'mt-auto' variant='dark' bg="dark" expand="lg">
+      <Container>
     <Navbar.Brand>Contact Me</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="me-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
-        <Nav.Link href="#link">Link</Nav.Link>
+        <Nav.Link >calvintan607@gmail.com</Nav.Link>
+        <Nav.Link >(415)-939-7787</Nav.Link>
       </Nav>
-    </Navbar.Collapse>
-    </Navbar>
+    </Navbar.Collapse> 
     </Container>
+    </Navbar>
+
     )
 }

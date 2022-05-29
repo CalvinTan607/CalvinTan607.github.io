@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Container } from 'react-bootstrap'
+import { Container,Row,Col } from 'react-bootstrap'
 
 
 export default function Homepage(){
@@ -8,11 +8,31 @@ export default function Homepage(){
     return(
         <Container>
             <div className='bg-light border'>
-                About Section
+            <Row>
+                <Col>
+                    <h1>
+                        About this website
+                    </h1>
+                </Col>
+                <Col>
+                    <p>
+                        heyo
+                    </p>
+                </Col>
+            </Row>
             </div>
-            <div>
-                Another About Section
-            </div>
+            <Row>
+                <Col>
+                    <h1>
+                        About the dataset
+                    </h1>
+                </Col>
+                <Col>
+                    <p>
+                        heyo
+                    </p>
+                </Col>
+            </Row>
         </Container>
     )
 }

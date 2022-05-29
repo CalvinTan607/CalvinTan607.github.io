@@ -12,8 +12,8 @@ export default function Header(){
 <Navbar variant= 'dark' bg="dark" expand="lg">
   <Container>
     <Navbar.Brand href="/">US Covid Statistics Map</Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
+    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+    <Navbar.Collapse id="basic-navbar-nav" >
       <Nav className="me-auto">
         <Nav.Link href='/'>Map</Nav.Link>
         <Nav.Link href="/home">HomePage</Nav.Link>

@@ -3,8 +3,7 @@ import axios from 'axios'
 import { useState } from 'react'
 
 import InfoCard from './InfoCard'
-import {Row,Col,Alert,Form,Button} from 'react-bootstrap'
-import LineChart from './LineChart'
+import {Row,Col,Alert,Form,Button,Container} from 'react-bootstrap'
 
 import "../css/Data.css"
 
@@ -60,6 +59,7 @@ export default function Data() {
           : null
       }
   <h1>Display Data in Cards</h1>
+  <Container className='bg-info'>
       <Form onSubmit={selectState}>
         <Row>
           <Col>
@@ -130,7 +130,7 @@ export default function Data() {
         
         <Button type = 'submit' >Submit</Button>
       </Form>
-    
+    </Container>
     
     {
       msg?<h1 style={{textAlign:"center"}}>{msg}</h1> : null

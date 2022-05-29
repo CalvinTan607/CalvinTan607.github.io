@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 import LineChart from '../components/LineChart'
-import {Row,Col,Form,Button,Alert} from 'react-bootstrap'
+import {Row,Col,Form,Button,Alert,Container} from 'react-bootstrap'
 
 export default function LineChartPage(){
     const [msg,setMsg] = useState('')
@@ -69,7 +69,8 @@ export default function LineChartPage(){
           : null
     }
                 <h1>Display Data in a Line Chart</h1>
-      <Form onSubmit={getChartData}>
+      <Container>
+      <Form className='bg-info' onSubmit={getChartData}>
         <Row>
           <Col>
           <Form.Group  controlId = 'selectedStateChart'>
@@ -148,6 +149,7 @@ export default function LineChartPage(){
         
         <Button type = 'submit' >Submit</Button>
       </Form>
+      </Container>
     
     {
       msg?<h1 style={{textAlign:"center"}}>{msg}</h1> : null
