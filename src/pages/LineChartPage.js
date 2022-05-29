@@ -70,9 +70,9 @@ export default function LineChartPage(){
     }
                 <h1>Display Data in a Line Chart</h1>
       <Container>
-      <Form className='bg-info' onSubmit={getChartData}>
-        <Row>
-          <Col>
+      <Form className='bg-info ' onSubmit={getChartData}>
+        
+          <Col className= 'm-3'>
           <Form.Group  controlId = 'selectedStateChart'>
             <Form.Label className='mb-3'>Select a State</Form.Label>
             <Form.Select  >
@@ -129,14 +129,14 @@ export default function LineChartPage(){
             </Form.Select>
         </Form.Group>
         </Col>
-        <Col>
+        <Col className= 'm-3'>
         <Form.Group controlId ='numberOfDaysChart'>
           <Form.Label className='mb-3'>How many days</Form.Label>
           <Form.Control type = 'input'></Form.Control>
           <Form.Text>Enter an integer between 2 - 365</Form.Text>
         </Form.Group>
         </Col>
-        <Col>
+        <Col className= 'm-3'>
           <Form.Group controlId = 'casesOrDeaths'>
             <Form.Label className = 'mb-3'>View Cases or Deaths?</Form.Label>
               <Form.Select>
@@ -145,10 +145,11 @@ export default function LineChartPage(){
               </Form.Select>
           </Form.Group>
         </Col>
-        </Row>
+        
         
         <Button type = 'submit' >Submit</Button>
       </Form>
+      
       </Container>
     
     {

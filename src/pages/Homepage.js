@@ -9,27 +9,35 @@ export default function Homepage(){
         <Container>
             <div className='bg-light border'>
             <Row>
-                <Col>
+                <Col >
+                    <Container>
                     <h1>
                         About this website
                     </h1>
+                    </Container>
                 </Col>
                 <Col>
                     <p>
-                        heyo
+                        This is a react application which shows Covid 19 statistics for the US. There are several forms this info can be displayed such 
+                        as a Line Chart, Cards, and an Interactive Map. 
                     </p>
                 </Col>
             </Row>
             </div>
+
             <Row>
                 <Col>
+                <Container>
                     <h1>
                         About the dataset
                     </h1>
+                    </Container>
                 </Col>
                 <Col>
                     <p>
-                        heyo
+                        The dataset is managed by the CDC, it is updated twice a day and statistics are updated by 
+
+                        L
                     </p>
                 </Col>
             </Row>

@@ -10,9 +10,9 @@ import LineChartPage from '../pages/LineChartPage'
 export default function Views(){
     return (
     <Routes>
-        <Route path ='/' element = {<MapWithToolTip/>}/>
-        <Route path ='/Data' element = {<Data/>}/>
-        <Route path = '/home' element = {<Homepage/>}/>
+        <Route path ='/' element = {<Homepage/>}/>
+        <Route path ='/cards' element = {<Data/>}/>
+        <Route path = '/map' element = {<MapWithToolTip/>}/>
         <Route path = '/lineChartPage' element={<LineChartPage/>}></Route>
     </Routes>
     )
