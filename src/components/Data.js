@@ -58,11 +58,18 @@ export default function Data() {
           ? <Alert key = 'danger' variant='danger' onClose={() => setError('')} dismissible> {error}</Alert>
           : null
       }
-  <h1>Display Data in Cards</h1>
+  <div style={{textAlign:'center'}}>
+    <h1>Display Data in Cards</h1>
+  </div>
+
   <Container className='bg-info'>
     <Row>
       <Col>
-        This is 
+      <div>
+        <h3>
+          This page displays Covid statistics data in cards, this is useful for those who like to see all the numbers at once. It is also much easier to see the day by day difference
+        </h3>
+      </div>
       </Col>
       <Col>
       <Form onSubmit={selectState}>
@@ -129,8 +136,9 @@ export default function Data() {
           <Form.Text>Enter an integer between 1 - 365</Form.Text>
         </Form.Group>
 
-        
-        <Button type = 'submit' >Submit</Button>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <Button className='m-3' type = 'submit' >Submit</Button>
+        </div>
       </Form>
       </Col>
       </Row>

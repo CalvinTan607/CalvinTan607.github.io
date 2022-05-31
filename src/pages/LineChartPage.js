@@ -68,14 +68,15 @@ export default function LineChartPage(){
           ? <Alert key = 'danger' variant='danger' onClose={() => setError('')} dismissible> {error}</Alert>
           : null
     }
-                <h1>Display Data in a Line Chart</h1>
+                <h1 style={{textAlign:"center"}}>Display Data in a Line Chart</h1>
       <Container className='bg-info '>
       <Row> 
       <Col>
-        <p>
-          This 
+      <h3>
+          This page displays Covid statistics with a line chart. 
           Good for spotting trends, such as the introduction of the Omnicron variant to the US (December 1, 2021)
-        </p>
+
+      </h3>
       </Col>
       <Col className='m-2'>
       <Form  onSubmit={getChartData}>
@@ -152,8 +153,10 @@ export default function LineChartPage(){
           </Form.Group>
 
         
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <Button className = 'm-3' type = 'submit' >Submit</Button>
+        </div>
         
-        <Button type = 'submit' >Submit</Button>
       </Form>
       </Col>
       </Row>

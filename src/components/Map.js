@@ -94,6 +94,11 @@ const Map = ({ setTooltipContent }) => {
 
   return (
     <>
+      <div>
+        <h3>
+          Hover over a state to see the most recent Covid Statistic for that jurisdiction
+        </h3>
+      </div>
       <ComposableMap data-tip="" projection="geoAlbersUsa">
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
