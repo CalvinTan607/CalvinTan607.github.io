@@ -1,8 +1,6 @@
 .header{
     display:flex;
-    border:solid;
-    background-color: lightgoldenrodyellow;
-    height:70px;
+    height:80px;
 }
 
 .headerText{
@@ -11,4 +9,17 @@
 
 .logo{
     width:100px;
+}
+
+.headerNote{
+    margin:0px;
+    color:green;
+}
+
+
+.navBar{
+    display:flex;
+    background-color: green;
+    color:white;
+    justify-content:flex-end;
 }

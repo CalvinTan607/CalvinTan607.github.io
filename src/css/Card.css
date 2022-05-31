@@ -1,0 +1,19 @@
+.card{
+    width:90%;
+}
+
+.stateName{
+    text-align: center;
+    font-family:"Lucida Console", "Courier New", monospace;
+    /*background-color: yellow; */
+}
+
+.infoSection{
+    margin:10px;
+}
+
+.date{
+    position:absolute;
+    top:0px;
+    font-size: 0.6em;
+}

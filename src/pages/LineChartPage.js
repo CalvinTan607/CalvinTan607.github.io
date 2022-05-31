@@ -1,80 +1,87 @@
 import React from 'react'
+import {useState} from 'react'
 import axios from 'axios'
-import { useState } from 'react'
-
-import InfoCard from './InfoCard'
-import {Row,Col,Alert,Form,Button,Container} from 'react-bootstrap'
-
-import "../css/Data.css"
 
 
+import LineChart from '../components/LineChart'
+import {Row,Col,Form,Button,Alert,Container} from 'react-bootstrap'
 
-export default function Data() {
-  const [error,setError] = useState('')
-  const [data, setData] = useState('')
-  const [msg,setMsg] = useState('')
-  
-  const selectState = (e) => {
-    e.preventDefault()
-    const selected = document.getElementById('selectedState')
-    const days = document.getElementById('numberOfDays')
-    const numberOfDays = days.value
-    const state = selected.value
-    //check if number is integer
-    if(numberOfDays%1!==0){
-      setError('Please enter an integer');
-      return 
-    }
-    //limiting the number of days
-    else if(numberOfDays>365||numberOfDays<=0){
-      setError('Your input must be within the days limit')
-      return
-    }
+export default function LineChartPage(){
+    const [msg,setMsg] = useState('')
+    const [chartData,setChartData] = useState('')
+    const [error,setError] = useState('')
 
-
-    axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=${numberOfDays}${state}&$order=submission_date%20DESC`)
-      .then(res => {
-        const response = res.data;
-        //spliting the time so only the date shows up
-        response.map(responses=>{
-          const split = responses.submission_date.split("T")
-          responses.submission_date=split[0]
-        })
-        setMsg(`Covid statistics for ${res.data[0].state}`)
-        setData(res.data)
-      }).catch(err => {
-        console.log(err)
-      })
-  }
-
-
-  
-
+    const getChartData=(e)=> {
+        e.preventDefault()
+        const selected = document.getElementById('selectedStateChart')
+        const days = document.getElementById('numberOfDaysChart')
+        const whichData = document.getElementById('casesOrDeaths')
     
-  
-  return (
-    <div>
-      {error
+        const whichStat = whichData.value
+        const numberOfDays = days.value
+        const state = selected.value
+    
+        var label;
+    
+        if(whichStat === 'tot_cases')
+          label = "Total Cases"
+        else 
+          label = "Total Deaths"
+    
+        //check if number is integer
+        if(numberOfDays%1!==0){
+          setError('Please enter an integer');
+          return 
+          }
+            //limiting the number of days
+          else if(numberOfDays>365||numberOfDays<=1){
+            setError('Your input must be within the days limit')
+            return
+          }
+          axios.get(`https://data.cdc.gov/resource/9mfq-cb36.json?$limit=${numberOfDays}${state}&$order=submission_date%20DESC`)
+          .then(res => {
+            console.log(res.data[0])
+            const response = res.data.reverse();
+            //spliting the time so only the date shows up
+            response.map(responses=>{
+              const split = responses.submission_date.split("T")
+              responses.submission_date=split[0]
+            })
+            setMsg(`Covid statistics for ${res.data[0].state}`)
+            
+            setChartData({
+              labels:res.data.map((data)=>data.submission_date),
+              datasets:[{
+                label: label,
+                data: res.data.map((data)=>data[`${whichStat}`]),
+                backgroundColor:['red'],
+              }]
+            })
+          }).catch(err => {
+            console.log(err)
+          })
+    }
+    
+    return(
+        <div>
+    {error
           ? <Alert key = 'danger' variant='danger' onClose={() => setError('')} dismissible> {error}</Alert>
           : null
-      }
-  <div style={{textAlign:'center'}}>
-    <h1>Display Data in Cards</h1>
-  </div>
-
-  <Container className='bg-info'>
-    <Row>
+    }
+                <h1 style={{textAlign:"center"}}>Display Data in a Line Chart</h1>
+      <Container className='bg-info '>
+      <Row> 
       <Col>
-      <div>
-        <h3>
-          This page displays Covid statistics data in cards, this is useful for those who like to see all the numbers at once. It is also much easier to see the day by day difference
-        </h3>
-      </div>
+      <h3>
+          This page displays Covid statistics with a line chart. 
+          Good for spotting trends, such as the introduction of the Omnicron variant to the US (December 1, 2021)
+
+      </h3>
       </Col>
-      <Col>
-      <Form onSubmit={selectState}>
-
-          <Form.Group  controlId = 'selectedState'>
+      <Col className='m-2'>
+      <Form  onSubmit={getChartData}>
+        
+          <Form.Group  controlId = 'selectedStateChart'>
             <Form.Label className='mb-3'>Select a State</Form.Label>
             <Form.Select  >
               <option value="&state=AL">Alabama</option>
@@ -130,43 +137,41 @@ export default function Data() {
             </Form.Select>
         </Form.Group>
 
-        <Form.Group controlId ='numberOfDays'>
+        <Form.Group controlId ='numberOfDaysChart'>
           <Form.Label className='mb-3'>How many days</Form.Label>
           <Form.Control type = 'input'></Form.Control>
-          <Form.Text>Enter an integer between 1 - 365</Form.Text>
+          <Form.Text>Enter an integer between 2 - 365</Form.Text>
         </Form.Group>
+  
 
+          <Form.Group controlId = 'casesOrDeaths'>
+            <Form.Label className = 'mb-3'>View Cases or Deaths?</Form.Label>
+              <Form.Select>
+                <option value = "tot_cases">Total Cases</option>
+                <option value = "tot_death">Total Deaths</option>
+              </Form.Select>
+          </Form.Group>
+
+        
         <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Button className='m-3' type = 'submit' >Submit</Button>
+        <Button className = 'm-3' type = 'submit' >Submit</Button>
         </div>
+        
       </Form>
       </Col>
       </Row>
-    </Container>
+      </Container>
     
     {
       msg?<h1 style={{textAlign:"center"}}>{msg}</h1> : null
     }
-    <div className = "cardsSection">
-      {/*conditional rendering of data*/}
-      {
-        data 
-        ? data.map(
-          datas =>
-            <InfoCard
-                date_submitted = {datas.submission_date}
-                state = {datas.state}
-                tot_cases = {datas.tot_cases}
-                tot_death = {datas.tot_death}
-                new_case = {datas.new_case}
-                new_death = {datas.new_death}
-            >
-            </InfoCard>
-          ) 
-        : null
-      }
-    </div>
 
-    </div>
-  )
+    {/* chart section over here*/}
+    {
+        chartData 
+        ? <LineChart chartData={chartData}/>
+        :null
+    }
+        </div>
+    )
 }
